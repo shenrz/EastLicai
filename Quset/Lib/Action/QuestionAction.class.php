@@ -1,30 +1,41 @@
 <?php
-class QuestionAction extends CommonAction
-{   
+
+class QuestionAction extends CommonAction {
+
     //问题总览页面
-    function index()
-    {
+    function index() {
         $this->display();
     }
+
     //问题详细页
-    function view()
-    {
-        $this->display();
+    function view() {
+        if (empty($_GET['id'])) {
+            $this->assign("jumpUrl", __APP__);
+            $this->error("对不起。您无权访问该网页");
+        } else {
+            $id = $_GET['id'];
+            $view = new Model("question");
+            $result = $view->getById($id);
+            $this->assign("show",$result);
+            $this->display();
+        }
     }
+
     //首页显示模块
-    function ShowIndex()
-    {
+    function ShowIndex() {
         $this->display();
     }
+
     //增加问题
-    function add()
-    {
+    function add() {
         $this->display();
     }
+
     //回答问题
-    function answer()
-    {
+    function answer() {
         $this->display();
     }
+
 }
+
 ?>
