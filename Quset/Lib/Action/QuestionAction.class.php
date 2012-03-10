@@ -30,6 +30,19 @@ class QuestionAction extends CommonAction {
     function add() {
         $this->display();
     }
+    //增加问题操作
+    function addDb()
+    {
+        $question = new Model();
+        if($question->create())
+        {
+            $question->add();
+            $this->success("添加问题成功");
+        }else
+        {
+            $this->error($question->getError());
+        }
+    }
 
     //回答问题
     function answer() {
